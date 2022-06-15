@@ -12,7 +12,7 @@ Webcam.attach('#camera');
 
 function speak() {
 	var synth=window.speechSynthesis;
-	speak_data_1="The First Prediction Of Emotion Is "+prediction_1;
+	speak_data_1="The First Prediction Of Emotion Is "+toSpeak;
 	var utterThis=new SpeechSynthesisUtterance(speak_data_1);
 	synth.speak(utterThis);
 }
@@ -40,6 +40,19 @@ function gotResult(error, results) {
 		console.error(error);
 	}
 	else {
+		document.getElementById("result_object_name").innerHTML=results[0].label;
+		gesture=results[0].label;
 		console.log(results);
+		toSpeak="";
+		if(gesture=="amazing") {
+			toSpeak="This is amazing";
+			document.getElementById("result_object_gesture_icon").innerHTML="&#128076;";}
+		else 	if(gesture=="best") {
+			toSpeak="This is the best hand gesture";
+			document.getElementById("result_object_gesture_icon").innerHTML="&#128077;";}
+		else 	if(gesture=="victory") {
+			toSpeak="This is a victorious hand gesture";
+			document.getElementById("result_object_gesture_icon").innerHTML="&#9996;";}
+		speak();
 	}
 }
