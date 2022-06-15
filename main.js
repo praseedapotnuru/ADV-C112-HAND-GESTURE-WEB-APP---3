@@ -12,7 +12,7 @@ Webcam.attach('#camera');
 
 function speak() {
 	var synth=window.speechSynthesis;
-	speak_data_1="The First Prediction Of Emotion Is "+toSpeak;
+	speak_data_1="The First Prediction Of Emotion Is "+prediction_1;
 	var utterThis=new SpeechSynthesisUtterance(speak_data_1);
 	synth.speak(utterThis);
 }
@@ -40,19 +40,32 @@ function gotResult(error, results) {
 		console.error(error);
 	}
 	else {
-		document.getElementById("result_object_name").innerHTML=results[0].label;
+		document.getElementById("result_emotion_name").innerHTML=results[0].label;
 		gesture=results[0].label;
 		console.log(results);
-		toSpeak="";
-		if(gesture=="amazing") {
-			toSpeak="This is amazing";
-			document.getElementById("result_object_gesture_icon").innerHTML="&#128076;";}
-		else 	if(gesture=="best") {
-			toSpeak="This is the best hand gesture";
-			document.getElementById("result_object_gesture_icon").innerHTML="&#128077;";}
-		else 	if(gesture=="victory") {
-			toSpeak="This is a victorious hand gesture";
-			document.getElementById("result_object_gesture_icon").innerHTML="&#9996;";}
+		if(gesture=="clapping") {
+			prediction_1="This is the clapping hand gesture";
+			document.getElementById("update_emoji").innerHTML="&#128079;";}
+		
+		else if(gesture=="victoryHand") {
+			prediction_1="This is the victory hand gesture";
+			document.getElementById("update_emoji").innerHTML="&#9996;";}
+		
+		else if(gesture=="horns") {
+			prediction_1="This is the horns hand gesture";
+			document.getElementById("update_emoji").innerHTML="&#129304;";}
+		
+		else if(gesture=="raisedFist") {
+			prediction_1="This is the raisedFist hand gesture";
+			document.getElementById("update_emoji").innerHTML="&#9994;";}
+		
+		else if(gesture=="thumbsUp") {
+			prediction_1="This is the thumbs up hand gesture";
+			document.getElementById("update_emoji").innerHTML="&#128077;";}
+		
+		else if(gesture=="okHand") {
+			prediction_1="This is the ok hand gesture";
+			document.getElementById("update_emoji").innerHTML="&#128076;";}
 		speak();
 	}
 }
